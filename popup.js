@@ -65,7 +65,7 @@ async function main() {
         chrome.runtime.sendMessage(
           { message: "inputDOT", inputDOT },
           function (response) {
-            console.log(response.farewell);
+            return response
           }
         );
 

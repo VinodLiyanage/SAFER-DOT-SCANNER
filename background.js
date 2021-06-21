@@ -121,9 +121,8 @@ async function mainModern(dotNumber) {
   }
 
   const tabId = await createTabWindow();
-
   const HTMLStringObject = await fetchData(dotNumber);
-
+  
   let status;
   if (HTMLStringObject && Object.values(HTMLStringObject).some((val) => val)) {
     status = "200";
