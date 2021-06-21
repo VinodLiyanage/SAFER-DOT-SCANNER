@@ -31,48 +31,39 @@ function getSettings() {
 async function mainNormal(dotNumber) {
   if (!dotNumber || typeof dotNumber !== "string") return;
   dotNumber = dotNumber.trim();
+  const { openAs } = await getSettings();
 
-  async function createTabWindow(dotNumber) {
-    const { openAs } = await getSettings();
+  function createTabWindow(dotNumber) {
     const url = `https://ai.fmcsa.dot.gov/SMS/Carrier/${dotNumber}/Overview.aspx`;
 
-    let tabId;
-    const createNewTab = async () => {
-      const tabs = await chrome.tabs.create({ active: true, url });
-      if (tabs && tabs.id) {
-        tabId = tabs.id;
-      }
+    const createNewTab = () => {
+      chrome.tabs.create({ active: true, url });
     };
 
-    const createNewWindow = async () => {
-      const window = await chrome.windows.create({ focused: true, url });
-      if (window && window.tabs) {
-        tabId = window.tabs?.[0]?.id;
-      }
+    const createNewWindow = () => {
+      chrome.windows.create({ focused: true, url });
     };
 
     if (openAs && typeof openAs === "string") {
       switch (openAs) {
         case "newTab":
-          await createNewTab();
+          createNewTab();
           break;
         case "newWindow":
-          await createNewWindow();
+          createNewWindow();
           break;
       }
     }
-    return tabId;
   }
 
-  return createTabWindow(dotNumber);
+  createTabWindow(dotNumber);
 }
 
 async function mainModern(dotNumber) {
+  if (!dotNumber || typeof dotNumber !== "string") return;
+  dotNumber = dotNumber.trim();
 
   async function fetchData(dotNumber) {
-    if (!dotNumber || typeof dotNumber !== "string") return;
-    dotNumber = dotNumber.trim();
-
     const URLObject = {
       carrierRegistration: `https://ai.fmcsa.dot.gov/SMS/Carrier/${dotNumber}/CarrierRegistration.aspx`,
       overview: `https://ai.fmcsa.dot.gov/SMS/Carrier/${dotNumber}/Overview.aspx`,
@@ -134,18 +125,40 @@ async function mainModern(dotNumber) {
   const HTMLStringObject = await fetchData(dotNumber);
 
   let status;
-  if (HTMLStringObject && Object.values(HTMLStringObject).some(val => val)) {
+  if (HTMLStringObject && Object.values(HTMLStringObject).some((val) => val)) {
     status = "200";
   } else {
     status = "404";
   }
 
   chrome.storage.local.set({ HTMLStringObject, status, tabId }, () => {
-    const message = (status === "200" ? "success" : "failed");
-    chrome.tabs.sendMessage(tabId, { message }, function (response) {
-      console.log(response.farewell);
-    });
+    const message = status === "200" ? "success" : "failed";
+    chrome.tabs.sendMessage(tabId, { message }, () => chrome.runtime.lastError);
   });
+}
+
+async function mainExecutor(dotNumber) {
+  const DOT_MIN_LENGTH = 5;
+  const DOT_MAX_LENGTH = 10;
+  const reDOT = /^[0-9]+$/gim;
+
+  const { viewMode } = await getSettings();
+
+  if (
+    dotNumber &&
+    dotNumber.length >= DOT_MIN_LENGTH &&
+    dotNumber.length <= DOT_MAX_LENGTH &&
+    reDOT.test(dotNumber)
+  ) {
+    switch (viewMode) {
+      case "normal":
+        mainNormal(dotNumber);
+        break;
+      case "modern":
+        mainModern(dotNumber);
+        break;
+    }
+  }
 }
 
 function contextMenu() {
@@ -163,45 +176,24 @@ function contextMenu() {
   };
 
   const handler = () => {
-    chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-      const { viewMode } = await getSettings();
-
+    chrome.contextMenus.onClicked.addListener((info, tab) => {
       const tabId = tab?.id;
       let selectionText = info?.selectionText?.trim();
-    
+
       if (selectionText) {
-        switch (viewMode) {
-          case "normal":
-            await mainNormal(selectionText);
-            break;
-          case "modern":
-            await mainModern(selectionText);
-            break;
-        }
+        mainExecutor(selectionText);
       } else {
         if (!tabId) {
           console.error("tabId not found!");
           return;
         }
-
         chrome.tabs.sendMessage(
           tabId,
           { message: "DOTScannerClicked" },
           async (response) => {
-
-            const selectionText = response?.selectionText?.trim();
-
-            if (selectionText) {
-              switch (viewMode) {
-                case "normal":
-                  await mainNormal(selectionText);
-                  break;
-                case "modern":
-                  await mainModern(selectionText);
-                  break;
-              }
-            }
-            return true;
+            if (!(response && response.rightClickText)) return;
+            const rightClickText = response?.rightClickText?.trim();
+            mainExecutor(rightClickText);
           }
         );
       }
@@ -212,24 +204,15 @@ function contextMenu() {
   handler();
 }
 
-async function listener() {
-  chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+function listener() {
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ farewell: "goodbye" });
-    const { viewMode } = await getSettings();
     if (!sender.tab && request.message === "inputDOT") {
-      const inputDOT = request?.inputDOT?.trim();
-      if (inputDOT) {
-        switch (viewMode) {
-          case "normal":
-            await mainNormal(inputDOT);
-            break;
-          case "modern":
-            await mainModern(inputDOT);
-            break;
-        }
-      }
+      if (!request.inputDOT) return;
+
+      const inputDOT = request.inputDOT?.trim();
+      mainExecutor(inputDOT);
     }
-    return true;
   });
 }
 

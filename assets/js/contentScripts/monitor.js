@@ -61,17 +61,17 @@ function getTextFromRightClick() {
   const handleContextMenu = (event) => {
     if(!(chrome.runtime && chrome.runtime.id)) return;
     
-    const handleMessage = async (request, _, sendResponse) => {
+    const handleMessage = (request, _, sendResponse) => {
       if (request.message === "DOTScannerClicked") {
-        const selectionText = getText(event);
-        if (selectionText) {
-          await sendResponse({ selectionText });
+        const rightClickText = getText(event);
+      
+        if(rightClickText) {
+          sendResponse({ rightClickText })
         }
       }
       chrome.runtime.onMessage.removeListener(handleMessage);
-      return true;
+      
     };
-
     chrome.runtime.onMessage.addListener(handleMessage);
   };
   document.addEventListener("contextmenu", handleContextMenu);

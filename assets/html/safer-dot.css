@@ -288,15 +288,10 @@ select {
   height: 50px;
   line-height: 50px;
   padding: 0 35px 0 10px;
-  background-image: url("../images/Icons/B_Arrow.png");
   background-position: 95% center;
   background-repeat: no-repeat;
   margin: 8px 0;
   text-decoration: none;
-}
-
-.boxLink:hover {
-  background-image: url("../images/Icons/Y_Arrow.png");
 }
 
 .double {
@@ -332,7 +327,6 @@ ul.tabs li a {
   width: 163px;
   height: 43px;
   line-height: 43px;
-  background-image: url(../Images/Layout/tab_blue.png);
   color: white;
   margin-left: -25px;
   font-size: 14px;
@@ -341,11 +335,6 @@ ul.tabs li a {
 
 ul.tabs li:first-child a {
   margin-left: 0;
-}
-
-ul.tabs li a:hover,
-ul.tabs li.selected a {
-  background-image: url(../Images/Layout/tab_orange.png);
 }
 
 ul.tabs li a.double {
@@ -397,7 +386,6 @@ form {
 #LicensingAndInsurance {
   margin-left: 3%;
   padding-left: 3%;
-  background-image: url(../Images/Layout/Carrier/carrierInfoDivider.png);
   background-repeat: no-repeat;
   background-position: left top;
   min-height: 160px;
