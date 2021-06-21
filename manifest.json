@@ -1,0 +1,44 @@
+{
+    "name": "SAFER DOT SCANNER",
+    "version": "1.0.0",
+    "description": "A Powerful SAFER U.S DOT Number Scanner Extension",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_icon": {   
+            "16":"/assets/images/logo16.png",
+            "32":"/assets/images/logo32.png",
+            "48":"/assets/images/logo512.png",
+            "128":"/assets/images/logo512.png"                    
+          },
+        "default_title": "SAFER DOT Scanner",
+        "default_popup": "popup.html"
+    },
+    "content_scripts" : [
+        {
+          "matches": ["<all_urls>"],
+          "run_at": "document_idle",
+          "js": [
+            "/assets/js/contentScripts/monitor.js"
+          ]
+        }
+      ],
+    "permissions": [
+        "storage",
+        "tabs",
+        "contextMenus",
+        "unlimitedStorage"
+    ],
+    "host_permissions":[
+        "https://ai.fmcsa.dot.gov/*"
+    ],
+    
+    "icons": {   
+        "16":"/assets/images/logo16.png",
+        "32":"/assets/images/logo32.png",
+        "48":"/assets/images/logo512.png",
+        "128":"/assets/images/logo512.png"                    
+    }
+}

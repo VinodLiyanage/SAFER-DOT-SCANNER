@@ -1,0 +1,807 @@
+@charset "UTF-8";
+/*CSS Reset*/
+* {
+  font-weight: normal;
+  font-style: normal;
+}
+
+ul,
+ol {
+  padding-left: 40px;
+}
+
+article,
+aside,
+section {
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+abbr[title],
+dfn[title] {
+  border: 0;
+  cursor: default;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input,
+select {
+  vertical-align: middle;
+}
+
+section,
+div,
+article,
+body,
+html {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  position: static;
+}
+
+a img {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table th,
+table td {
+  padding: 0px 6px;
+}
+
+body {
+  font-family: SourceSansPro, Arial, Sans-Serif;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #444444;
+  background: #e4e4e8;
+  background: -webkit-gradient(
+    linear,
+    50% 0%,
+    50% 100%,
+    color-stop(17%, #e4e4e8),
+    color-stop(100%, #6e6159)
+  );
+  background: -webkit-linear-gradient(top, #e4e4e8 17%, #6e6159 100%);
+  background: -moz-linear-gradient(top, #e4e4e8 17%, #6e6159 100%);
+  background: -o-linear-gradient(top, #e4e4e8 17%, #6e6159 100%);
+  background: linear-gradient(top, #e4e4e8 17%, #6e6159 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFE4E4E8',endColorstr='#FF6E6159');
+  background: linear-gradient(to bottom, #e4e4e8 17%, #6e6159 100%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: SourceSansPro, Arial, Sans-Serif;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #444444;
+  margin: 10px 0;
+}
+
+input,
+textarea,
+button,
+submit {
+  font-family: SourceSansPro, Arial, Sans-Serif;
+  font-size: 13px;
+}
+
+strong {
+  font-family: SourceSansPro700, Arial, sans-serif;
+}
+
+p {
+  margin: 10px 0;
+}
+
+a {
+  color: #001647;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #001647;
+}
+
+a:hover {
+  color: #8f600d;
+}
+
+a.definition,
+a.definition:visited,
+a.definition:hover {
+  color: inherit;
+}
+
+article p a,
+article table a,
+article ul a,
+article ol a {
+  text-decoration: underline;
+}
+
+a.no-underline,
+a.footnoteLnk {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 19px;
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+h2 {
+  font-size: 19px;
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+h3 {
+  font-size: 18px;
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+h4 {
+  font-size: 16px;
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+h5 {
+  font-size: 15px;
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+h6 {
+  font-size: 14px;
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+.blueHead {
+  background-color: #001647;
+  color: white;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+/*input styles*/
+input[type="radio"] {
+  vertical-align: -2px;
+}
+
+input[type="checkbox"] {
+  vertical-align: -2px;
+}
+
+input[type="text"],
+input[type="num"],
+input[type="phone"],
+input[type="email"] {
+  padding: 0 5px;
+}
+
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+submit,
+a.linkButton {
+  background: none repeat scroll 0 0 #001647;
+  border: 0;
+  color: White;
+  text-transform: uppercase;
+  padding: 4px 25px;
+  text-align: center;
+  display: inline-block;
+}
+
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder {
+  color: #d9d9d9;
+  opacity: 1;
+}
+
+.watermark {
+  color: #919191;
+  opacity: 1;
+}
+
+select {
+  color: #444;
+}
+
+.clear {
+  clear: both;
+}
+
+.printClear,
+.displayNone {
+  display: none;
+}
+
+.element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  font-size: 1em;
+  background: #fff;
+}
+
+.container-inline div,
+.container-inline label {
+  display: inline;
+}
+
+.boxLink {
+  border: solid 1px #d9d9d9;
+  border-radius: 2px;
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 35px 0 10px;
+  background-image: url("../images/Icons/B_Arrow.png");
+  background-position: 95% center;
+  background-repeat: no-repeat;
+  margin: 8px 0;
+  text-decoration: none;
+}
+
+.boxLink:hover {
+  background-image: url("../images/Icons/Y_Arrow.png");
+}
+
+.double {
+  line-height: 1.2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 30px;
+}
+
+.no-break {
+  white-space: nowrap;
+}
+
+.no-list {
+  list-style: none;
+  padding: 0;
+}
+
+ul.tabs {
+  list-style: none;
+  padding: 0;
+  height: 43px;
+  border-bottom: solid 3px #fcb333;
+}
+
+ul.tabs li {
+  float: left;
+}
+
+ul.tabs li a {
+  display: block;
+  padding: 0 15px;
+  width: 163px;
+  height: 43px;
+  line-height: 43px;
+  background-image: url(../Images/Layout/tab_blue.png);
+  color: white;
+  margin-left: -25px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+ul.tabs li:first-child a {
+  margin-left: 0;
+}
+
+ul.tabs li a:hover,
+ul.tabs li.selected a {
+  background-image: url(../Images/Layout/tab_orange.png);
+}
+
+ul.tabs li a.double {
+  line-height: 1.2;
+  padding-top: 5px;
+  height: 38px;
+}
+
+.tabBody {
+  border: solid 1px #001647;
+  border-top: 0;
+  margin-bottom: 15px;
+}
+
+article.carrier-data {
+  background-color: White;
+  padding-top: 15px;
+}
+
+form {
+  position: relative;
+}
+
+.mobileNote {
+  display: none;
+}
+
+.print-watermark {
+  display: none;
+}
+
+/*Carrier Header*/
+#CarrierInfo {
+  padding: 0 15px 15px 15px;
+}
+
+#CarrierInfo h3 {
+  margin-bottom: 1px;
+}
+
+#basicInfo,
+#SafetyRating,
+#LicensingAndInsurance {
+  width: 28%;
+  float: left;
+}
+
+#SafetyRating,
+#LicensingAndInsurance {
+  margin-left: 3%;
+  padding-left: 3%;
+  background-image: url(../Images/Layout/Carrier/carrierInfoDivider.png);
+  background-repeat: no-repeat;
+  background-position: left top;
+  min-height: 160px;
+}
+
+.data-source {
+  margin-top: 1px;
+}
+
+#SafetyRating #Rating {
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+#CarrierInfo table {
+  width: 100%;
+}
+
+#CarrierInfo table th {
+  text-align: left;
+  padding: 2px 1px;
+  white-space: nowrap;
+}
+
+#CarrierInfo table thead th {
+  border-bottom: solid 1px #919191;
+}
+
+.modal-content aside {
+  display: none;
+}
+
+#CarrierDetail {
+  margin: 10px 10px 30px 10px;
+}
+
+#CarrierDetail .CarrierDetailCol {
+  float: left;
+  width: 28%;
+  margin-left: 8%;
+}
+
+#CarrierDetail .CarrierDetailCol:first-child {
+  margin-left: 0;
+}
+
+#CarrierDetail .boxLink {
+  margin-right: 20px;
+}
+
+#SummaryOfActivities ul,
+#InspectionSelectionSystem ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+#SummaryOfActivities ul ul {
+  padding-left: 40px;
+}
+
+#PenaltiesHistory ul {
+  padding-left: 10px;
+  list-style: none;
+}
+
+#PenaltiesHistory ul li {
+  padding-bottom: 3px;
+  position: relative;
+}
+
+#PenaltiesHistory ul li a {
+  text-decoration: none;
+}
+
+#PenaltiesHistory ul li span.indicator {
+  display: block;
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  left: -10px;
+  top: 3px;
+  background-repeat: no-repeat;
+}
+
+#PenaltiesHistory ul ul {
+  border-bottom: solid 1px #e6e6e6;
+}
+
+#PenaltiesHistory ul ul li {
+  padding-bottom: 0;
+}
+
+#PenaltiesHistory ul li.head {
+  text-transform: uppercase;
+  font-family: SourceSansPro600, Arial, sans-serif;
+}
+
+#PenaltiesHistory .closedDate {
+  display: inline-block;
+  width: 40%;
+}
+
+#PenaltiesHistory .viol {
+  display: inline-block;
+  width: 35%;
+}
+
+.carrierNote {
+  margin: 5px 10px;
+  font-size: 16px;
+}
+
+.carrierNote.oos {
+  color: red;
+}
+.overviewData,
+.detailData {
+  background-color: #d5e8fa;
+  list-style: none;
+  height: 120px;
+  padding: 0;
+}
+
+.detailData {
+  height: 210px;
+}
+
+.detailData.protected {
+  height: 250px;
+}
+
+.svList {
+  height: 70px;
+}
+
+.overviewData li,
+.detailData li {
+  float: left;
+  width: 14.28%;
+  height: 120px;
+}
+
+.detailData li {
+  height: 210px;
+}
+
+.detailData.protected li {
+  height: 230px;
+}
+
+.overviewData.protected li,
+.detailData.protected li {
+  width: 12.5%;
+}
+
+.svList li {
+  height: 80px;
+}
+
+.overviewData li .results,
+.detailData li .results {
+  border-left: solid 3px white;
+  height: 110px;
+  padding-top: 10px;
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.detailData li .results {
+  height: 200px;
+}
+
+.detailData.protected li .results {
+  height: 220px;
+}
+
+.svList li .results {
+  height: 60px;
+}
+
+.overviewData li:first-child .results,
+.detailData li:first-child .results {
+  border-left: 0;
+}
+
+.overviewData .sv {
+  float: left;
+}
+
+.overviewData .val {
+  font-size: 18px;
+  display: block;
+}
+
+.overviewData .prioritized {
+  color: #8f600d;
+}
+
+.overviewData label {
+  display: block;
+  margin-bottom: 1em;
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+.detailData label {
+  font-family: SourceSansPro600, Arial, Sans-Serif;
+}
+
+.detailData .detailItem {
+  margin-bottom: 0.5em;
+}
+
+.overviewData .no-percentile {
+  font-size: 13px;
+}
+
+.overviewData li .notPublicMsg,
+.overviewData .na .results,
+.detailData li .notPublicMsg,
+.detailData .na .results {
+  text-align: center;
+  font-size: 20px;
+  padding-top: 40px;
+  display: block;
+  text-transform: uppercase;
+  height: 80px;
+}
+
+.detailData.protected li .notPublicMsg {
+  height: 190px;
+}
+
+.svList li .notPublicMsg,
+.svList .na .results {
+  padding-top: 10px;
+}
+
+.footnote .sv {
+  float: left;
+}
+
+#SummaryOfActivities ul .sv {
+  height: 20px;
+  line-height: 16px;
+  vertical-align: -6px;
+}
+
+.carrier-flags {
+  color: Red;
+}
+
+.carrier-flags ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.boxLink,
+.double {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: auto;
+  line-height: normal;
+}
+.boxLink .redflag {
+  display: block;
+  float: left;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+/*Registration Info*/
+#regBox {
+  border: solid 1px #001647;
+  margin-bottom: 15px;
+}
+
+#regBox h3 {
+  background-color: #001647;
+  padding: 8px 5px;
+  text-transform: uppercase;
+  color: white;
+  margin: 0;
+  color: white;
+  font-size: 13px;
+}
+
+#regBox ul.col1,
+#regBox ul.col2 {
+  list-style: none;
+  padding: 0;
+  width: 45%;
+  padding-left: 5%;
+  float: left;
+  margin: 20px 0;
+}
+
+#regBox ul.col1 li,
+#regBox ul.col2 li {
+  clear: left;
+}
+
+#regBox ul.col1 label,
+#regBox ul.col2 label {
+  display: block;
+  float: left;
+  width: 130px;
+  clear: left;
+}
+
+#regBox ul.col1 span.dat,
+#regBox ul.col2 span.dat {
+  margin-left: 135px;
+  display: block;
+}
+
+#regBox .opClass,
+#regBox .cargo {
+  color: #919191;
+  list-style: none;
+  padding: 0 0 0 7%;
+  margin: 20px 0;
+}
+
+#regBox .opClass li,
+#regBox .cargo li {
+  width: 31%;
+  float: left;
+}
+
+#regBox .opClass li .chk,
+#regBox .cargo li .chk {
+  font-family: SourceSansPro600, Arial, sans-serif;
+  display: inline-block;
+  width: 10px;
+}
+
+#regBox .opClass .checked,
+#regBox .cargo .checked {
+  color: #444;
+}
+
+#regBox .clear {
+  height: 20px;
+}
+
+#regBox table {
+  width: 85%;
+  margin: 10px auto;
+  border-collapse: collapse;
+  border: solid 1px #001647;
+}
+
+#regBox .puNote {
+  width: 85%;
+  margin: 10px auto;
+}
+
+#regBox table tbody td,
+#regBox table tbody th {
+  border-top: solid 1px #001647;
+  border-bottom: solid 1px #001647;
+  padding: 3px 5px;
+}
+
+#regBox table tbody td {
+  text-align: center;
+}
+
+#regBox table tbody th {
+  text-align: left;
+}
+
+#regBox table thead th {
+  background: #f5fafa;
+  background: -moz-linear-gradient(top, #266092 0%, #001647 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #266092),
+    color-stop(100%, #001647)
+  );
+  background: -webkit-linear-gradient(top, #266092 0%, #001647 100%);
+  background: -o-linear-gradient(top, #266092 0%, #001647 100%);
+  background: -ms-linear-gradient(top, #266092 0%, #001647 100%);
+  background: linear-gradient(to bottom, #266092 0%, #001647 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#266092', endColorstr='#001647',GradientType=0 );
+  text-transform: uppercase;
+  font-family: SourceSansPro600, Arial, sans-serif;
+  padding: 10px 5px;
+  color: white;
+}
+
+.carrier-data {
+  padding-bottom: 20px;
+}
+
+.container-sm {
+  margin: auto;
+  width: 80%;
+}
+
+@media only screen and (max-width: 858px) {
+  .container-sm {
+    width: 100%;
+  }
+}

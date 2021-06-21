@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAFER DOT SCANNER</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <style>
+      body {
+        width: 400px;
+        height: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="container-fluid d-flex justify-content-center align-items-center"
+    >
+      <div class="container-wrapper container-fluid mt-2">
+        <div class="title mb-2 d-flex justify-content-center">
+          <span class="h6">SAFER DOT SCANNER</span>
+        </div>
+        <div class="search-container">
+          <div class="input-group mb-3">
+            <input
+              id="inputSearch"
+              type="text"
+              minlength="5"
+              maxlength="10"
+              class="form-control"
+              placeholder="SAFER DOT Number"
+              aria-label="SAFER DOT Number"
+              aria-describedby="searchBtn"
+              required
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="searchBtn"
+            >
+              Search
+            </button>
+            <div class="valid-feedback m-0">Looks good!</div>
+            <div class="invalid-feedback m-0">Invalid DOT Number!</div>
+          </div>
+        </div>
+        <div class="control-container">
+          <div class="openAs-container">
+            <div class="radio-container border rounded p-2">
+              <div class="h6">Open As</div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="openAs"
+                  id="createNewTab"
+                  value="createNewTab"
+                />
+                <label class="form-check-label" for="createNewTab">
+                  New Tab
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="openAs"
+                  id="createNewWindow"
+                  value="createNewWindow"
+                  checked
+                />
+                <label class="form-check-label" for="createNewWindow">
+                  New Window
+                </label>
+              </div>
+            </div>
+            <div class="checkbox-container">
+              <div class="form-check mt-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="normal"
+                  id="normalView"
+                />
+                <label class="form-check-label" for="normalView">
+                  Normal View
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./popup.js"></script>
+  </body>
+</html>
