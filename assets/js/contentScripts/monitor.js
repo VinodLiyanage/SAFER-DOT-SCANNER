@@ -1,3 +1,16 @@
+/***********************************************************************
+  
+            https://github.com/VinodLiyanage/SAFER-DOT-SCANNER
+  -------------------------------- (C) ---------------------------------
+  @name monitor.js
+  @version 1.0
+  @author Vinod Liyanage
+  @license MIT
+  @description content script, monitor context menu events.
+************************************************************************/
+
+
+
 function getTextFromRightClick(event) {
   if (!(event && event.target)) return;
 

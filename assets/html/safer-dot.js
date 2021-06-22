@@ -1,3 +1,16 @@
+
+/***********************************************************************
+  
+            https://github.com/VinodLiyanage/SAFER-DOT-SCANNER
+  -------------------------------- (C) ---------------------------------
+  @name safer-dot.js
+  @version 1.0
+  @author Vinod Liyanage
+  @license MIT
+  @description populate fetch data into the safer-dot.html
+************************************************************************/
+
+
 const sessionStorage = window.sessionStorage;
 
 function addLoading() {

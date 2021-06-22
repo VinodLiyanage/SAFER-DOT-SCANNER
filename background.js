@@ -1,3 +1,15 @@
+/***********************************************************************
+  
+            https://github.com/VinodLiyanage/SAFER-DOT-SCANNER
+  -------------------------------- (C) ---------------------------------
+  @name background.js
+  @version 1.0
+  @author Vinod Liyanage
+  @license MIT
+  @description extension background script.
+************************************************************************/
+
+
 function setDefaults() {
   chrome.runtime.onInstalled.addListener(() => {
     try {

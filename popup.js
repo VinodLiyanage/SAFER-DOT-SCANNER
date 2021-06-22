@@ -1,3 +1,14 @@
+/***********************************************************************
+  
+            https://github.com/VinodLiyanage/SAFER-DOT-SCANNER
+  -------------------------------- (C) ---------------------------------
+  @name popup.js
+  @version 1.0
+  @author Vinod Liyanage
+  @license MIT
+  @description extension popup script.
+************************************************************************/
+
 async function main() {
   const DOT_MIN_LENGTH = 5;
   const DOT_MAX_LENGTH = 10;
