@@ -69,6 +69,7 @@ function main() {
     if (request.message === "DOTScannerClicked") {
       const rightClickText = getTextFromRightClick(newEvent);
       sendResponse({ rightClickText });
+      newEvent = null;
     }
   };
 

@@ -154,17 +154,15 @@ async function main() {
   function getStorageData() {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(
-        ["HTMLStringObject", "status", "tabId"],
+        ["HTMLStringObject", "status"],
         (result) => {
           const HTMLStringObject = result?.HTMLStringObject;
           const status = result?.status;
-          const tabId = result?.tabId;
 
           if (HTMLStringObject) {
             resolve({
               HTMLStringObject,
-              status,
-              tabId,
+              status
             });
           } else {
             reject(false);
@@ -182,7 +180,7 @@ async function main() {
   const articleElementObject = getArticles(HTMLStringObject);
   createElement(articleElementObject);
 
-  chrome.storage.local.remove(["HTMLStringObject", "status", "tabId"]);
+  chrome.storage.local.remove(["HTMLStringObject", "status"]);
   sessionStorage.setItem("HTMLStringObject", JSON.stringify(HTMLStringObject));
 
   return true;

@@ -130,7 +130,7 @@ async function mainModern(dotNumber) {
     status = "404";
   }
 
-  chrome.storage.local.set({ HTMLStringObject, status, tabId }, () => {
+  chrome.storage.local.set({ HTMLStringObject, status }, () => {
     const message = status === "200" ? "success" : "failed";
     chrome.tabs.sendMessage(tabId, { message }, () => chrome.runtime.lastError);
   });
@@ -215,8 +215,14 @@ function listener() {
   });
 }
 
+
 (() => {
   setDefaults();
   contextMenu();
   listener();
+
+//* last minute cleaning up.
+chrome.runtime.onSuspend.addListener(() => {
+  chrome.storage.local.remove(['HTMLStringObject', 'status'])
+})
 })();
