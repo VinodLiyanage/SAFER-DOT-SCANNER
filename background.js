@@ -1,24 +1,62 @@
-/***********************************************************************
-  
-            https://github.com/VinodLiyanage/SAFER-DOT-SCANNER
-  -------------------------------- (C) ---------------------------------
-  @name background.js
-  @version 1.0
-  @author Vinod Liyanage
-  @license MIT
-  @description extension background script.
-************************************************************************/
-
-
-function setDefaults() {
-  chrome.runtime.onInstalled.addListener(() => {
-    try {
-      chrome.storage.local.set({ openAs: "newWindow", viewMode: "modern" });
-    } catch (e) {
-      throw new Error(e);
-    }
-  });
+const config = {
+  windowWidth: 785,
+  windowHeight: 690,
 }
+
+chrome.runtime.onInstalled.addListener(() => {
+  try {
+    chrome.storage.local.set({ openAs: "newWindow", viewMode: "modern" });
+  } catch (err) {
+    throw new Error('fatal - internal error occured!', err);
+  }
+
+  chrome.contextMenus.create(
+    {
+      title: "Search for SAFER DOT",
+      id: `SAFER_DOT_SCANNER`,
+      contexts: ["all"],
+    },
+    () => chrome.runtime.lastError
+  );
+
+});
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  const tabId = tab?.id;
+  let selectionText = info?.selectionText?.trim();
+
+  if (selectionText) {
+    mainExecutor(selectionText);
+  } else {
+    if (!tabId) {
+      console.error("tabId not found!");
+      return;
+    }
+    chrome.tabs.sendMessage(
+      tabId,
+      { message: "DOTScannerClicked" },
+      async (response) => {
+        if (!(response && response.rightClickText)) return;
+        const rightClickText = response?.rightClickText?.trim();
+        mainExecutor(rightClickText);
+      }
+    );
+  }
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  sendResponse({ farewell: "goodbye" });
+  if (!sender.tab && request.message === "inputDOT") {
+    if (!request.inputDOT) return;
+
+    const inputDOT = request.inputDOT?.trim();
+    mainExecutor(inputDOT);
+  }
+});
+
+chrome.runtime.onSuspend.addListener(() => {
+  chrome.storage.local.remove(["HTMLStringObject", "status"]);
+});
 
 async function getCurrentTab() {
   let queryOptions = { active: true, currentWindow: true };
@@ -53,7 +91,7 @@ async function mainNormal(dotNumber) {
     };
 
     const createNewWindow = () => {
-      chrome.windows.create({ focused: true, url });
+      chrome.windows.create({ focused: true, url, width:config.windowWidth, height:config.windowHeight });
     };
 
     if (openAs && typeof openAs === "string") {
@@ -113,7 +151,7 @@ async function mainModern(dotNumber) {
     };
 
     const createNewWindow = async () => {
-      const window = await chrome.windows.create({ focused: true, url });
+      const window = await chrome.windows.create({ focused: true, url, width:config.windowWidth, height:config.windowHeight });
       if (window && window.tabs) {
         tabId = window.tabs?.[0]?.id;
       }
@@ -133,8 +171,9 @@ async function mainModern(dotNumber) {
   }
 
   const tabId = await createTabWindow();
-  const HTMLStringObject = await fetchData(dotNumber);
   
+  const HTMLStringObject = await fetchData(dotNumber);
+
   let status;
   if (HTMLStringObject && Object.values(HTMLStringObject).some((val) => val)) {
     status = "200";
@@ -172,69 +211,5 @@ async function mainExecutor(dotNumber) {
   }
 }
 
-function contextMenu() {
-  const create = async () => {
-    chrome.runtime.onInstalled.addListener(() => {
-      chrome.contextMenus.create(
-        {
-          title: "Search for SAFER DOT",
-          id: `SAFER_DOT_SCANNER`,
-          contexts: ["all"],
-        },
-        () => chrome.runtime.lastError
-      );
-    });
-  };
-
-  const handler = () => {
-    chrome.contextMenus.onClicked.addListener((info, tab) => {
-      const tabId = tab?.id;
-      let selectionText = info?.selectionText?.trim();
-
-      if (selectionText) {
-        mainExecutor(selectionText);
-      } else {
-        if (!tabId) {
-          console.error("tabId not found!");
-          return;
-        }
-        chrome.tabs.sendMessage(
-          tabId,
-          { message: "DOTScannerClicked" },
-          async (response) => {
-            if (!(response && response.rightClickText)) return;
-            const rightClickText = response?.rightClickText?.trim();
-            mainExecutor(rightClickText);
-          }
-        );
-      }
-    });
-  };
-
-  create();
-  handler();
-}
-
-function listener() {
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    sendResponse({ farewell: "goodbye" });
-    if (!sender.tab && request.message === "inputDOT") {
-      if (!request.inputDOT) return;
-
-      const inputDOT = request.inputDOT?.trim();
-      mainExecutor(inputDOT);
-    }
-  });
-}
 
 
-(() => {
-  setDefaults();
-  contextMenu();
-  listener();
-
-//* last minute cleaning up.
-chrome.runtime.onSuspend.addListener(() => {
-  chrome.storage.local.remove(['HTMLStringObject', 'status'])
-})
-})();
